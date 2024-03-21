@@ -1,11 +1,19 @@
 import random
 
 
+# Definindo a classe base para representar um personagem no jogo.
 class Personagem:
     """Classe base para representar um personagem do jogo."""
 
     def __init__(self, nome, vida, nivel):
-        """Inicializa um personagem com nome, vida e nível."""
+        """
+        Inicializa um personagem com nome, vida e nível.
+
+        Args:
+            nome (str): O nome do personagem.
+            vida (int): A quantidade de vida do personagem.
+            nivel (int): O nível de poder do personagem.
+        """
         self.__nome = nome
         self.__vida = vida
         self.__nivel = nivel
@@ -23,13 +31,21 @@ class Personagem:
         return self.__nivel
 
     def exibir_detalhes(self):
-        """Exibe os detalhes do personagem, incluindo nome, vida e nível."""
+        """
+        Exibe os detalhes do personagem, incluindo nome, vida e nível.
+
+        Returns:
+            str: Uma string formatada com os detalhes do personagem.
+        """
         return f"Nome: {self.get_nome()}\nVida: {self.get_vida()}\nNível: {self.get_nivel()}"
 
     def receber_ataque(self, dano):
         """
         Aplica o dano recebido ao personagem, subtraindo-o da vida.
         Se a vida ficar abaixo de 0, é ajustada para 0.
+
+        Args:
+            dano (int): A quantidade de dano a ser aplicada.
         """
         self.__vida -= dano
         if self.__vida < 0:
@@ -38,17 +54,29 @@ class Personagem:
     def atacar(self, alvo):
         """
         Realiza um ataque ao alvo, causando um dano aleatório com base no nível do atacante.
+
+        Args:
+            alvo (Personagem): O personagem alvo do ataque.
         """
         dano = random.randint(self.get_nivel() * 2, self.get_nivel() * 4)
         alvo.receber_ataque(dano)
         print(f"{self.get_nome()} atacou {alvo.get_nome()} e causou {dano} de dano!")
 
 
+# Definindo a classe para representar um herói no jogo.
 class Heroi(Personagem):
     """Classe para representar um herói, derivada da classe Personagem."""
 
     def __init__(self, nome, vida, nivel, habilidade):
-        """Inicializa um herói com nome, vida, nível e habilidade especial."""
+        """
+        Inicializa um herói com nome, vida, nível e habilidade especial.
+
+        Args:
+            nome (str): O nome do herói.
+            vida (int): A quantidade de vida do herói.
+            nivel (int): O nível de poder do herói.
+            habilidade (str): A habilidade especial do herói.
+        """
         super().__init__(nome, vida, nivel)
         self.__habilidade = habilidade
 
@@ -57,12 +85,20 @@ class Heroi(Personagem):
         return self.__habilidade
 
     def exibir_detalhes(self):
-        """Exibe os detalhes do herói, incluindo a habilidade especial."""
+        """
+        Exibe os detalhes do herói, incluindo a habilidade especial.
+
+        Returns:
+            str: Uma string formatada com os detalhes do herói.
+        """
         return f"{super().exibir_detalhes()}\nHabilidade: {self.get_habilidade()}\n"
 
     def ataque_especial(self, alvo):
         """
         Realiza um ataque especial ao alvo, causando um dano aumentado com base no nível do herói.
+
+        Args:
+            alvo (Personagem): O personagem alvo do ataque.
         """
         dano = random.randint(self.get_nivel() * 5, self.get_nivel() * 8)
         alvo.receber_ataque(dano)
@@ -71,11 +107,21 @@ class Heroi(Personagem):
         )
 
 
+# Definindo a classe para representar um inimigo no jogo.
 class Inimigo(Personagem):
     """Classe para representar um inimigo, derivada da classe Personagem."""
 
     def __init__(self, nome, vida, nivel, tipo):
-        """Inicializa um inimigo com nome, vida, nível e tipo."""
+        """
+        Inicializa um inimigo com nome, vida, nível e tipo.
+
+        Args:
+            nome (str): O nome do inimigo.
+            vida (int): A quantidade de vida
+        # do inimigo.
+        # nivel (int): O nível de poder do inimigo.
+        # tipo (str): O tipo de inimigo (por exemplo, 'Voador', 'Terrestre').
+        """
         super().__init__(nome, vida, nivel)
         self.__tipo = tipo
 
@@ -84,10 +130,16 @@ class Inimigo(Personagem):
         return self.__tipo
 
     def exibir_detalhes(self):
-        """Exibe os detalhes do inimigo, incluindo o tipo."""
+        """
+        Exibe os detalhes do inimigo, incluindo o tipo.
+
+        Returns:
+            str: Uma string formatada com os detalhes do inimigo.
+        """
         return f"{super().exibir_detalhes()}\nTipo: {self.get_tipo()}\n"
 
 
+# Definindo a classe orquestradora do jogo.
 class Jogo:
     """Classe orquestradora do jogo."""
 
